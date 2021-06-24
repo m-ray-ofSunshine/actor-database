@@ -1,0 +1,13 @@
+.card {
+    margin:0 auto;
+    float: none;
+    margin-top: 100px;
+    border-width: 10px;
+    border-color: black;
+}
+
+.card-header {
+    background-color: white;
+    color: black;
+    font-size: 35px;
+}
