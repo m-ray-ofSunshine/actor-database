@@ -7,6 +7,7 @@ var apiUrlPersonGetDetails;
 var apiUrlPersonGetMovieCredits;
 var apiUrlPersonGetTwitterID;
 var personTwitterID;
+var apiUrlgetPersonImage;
 
 function getPersonID() {
     fetch(apiUrlPersonSearch)
@@ -18,7 +19,7 @@ function getPersonID() {
         apiUrlPersonGetDetails = "https://api.themoviedb.org/3/person/" + personID + "?api_key=" + apiKey 
         apiUrlPersonGetMovieCredits = "https://api.themoviedb.org/3/person/" + personID+ "/movie_credits?api_key="+ apiKey
         apiUrlPersonGetTwitterID = "https://api.themoviedb.org/3/person/" + personID + "/external_ids?api_key=" + apiKey 
-        
+        apiUrlgetPersonImage = "https://api.themoviedb.org/3/person/" +personID + "/images?api_key=" + apiKey;
         })
 
 }
@@ -58,4 +59,17 @@ function storeInput() {
     searchInput = $("#userInput").val()
     console.log(searchInput);
     localStorage.setItem("search", searchInput)
+}
+
+function getPersonImage() {
+    fetch(apiUrlgetPersonImage)
+        .then(function (response) {
+        return response.json()
+        })
+        .then(function (data) {
+            console.log(data);
+            console.log("https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path );
+            $("#personImage").attr("src","https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path  );
+
+        })
 }
