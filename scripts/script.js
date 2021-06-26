@@ -12,6 +12,17 @@ var apiUrlgetPersonImage;
 var apiUrlgetPersonBio;
 var apiUrlgetPersonName;
 
+var scoreArr = [];
+var scoreIndex = [];
+var movieArr = [];
+var movieIDArr = [];
+var movieOne = document.getElementById("movieOne");
+var movieTwo = document.getElementById("movieTwo");
+var movieThree = document.getElementById("movieThree");
+var movieFour = document.getElementById("movieFour");
+var movieFive = document.getElementById("movieFive");
+
+
 function getPersonID() {
     fetch(apiUrlPersonSearch)
     .then(function (response) {
