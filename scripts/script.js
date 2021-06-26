@@ -32,6 +32,10 @@ function getPersonID() {
     })
     .then(function (data) {
         personID = data.results[0].id; 
+        getPersonImage(personID);
+        getPersonBio(personID);
+        getMoviePopularity(personID)
+        getMovieIDArr(movieIDArr, scoreIndex)
     })
     
 }
@@ -47,7 +51,6 @@ function getPersonDetails() {
     })
 }
 function getPersonMovieCredits() {
-    apiUrlPersonGetMovieCredits = "https://api.themoviedb.org/3/person/" + personID+ "/movie_credits?api_key="+ apiKey
     fetch(apiUrlPersonGetMovieCredits)
     .then(function (response) {
         return response.json()
@@ -76,15 +79,15 @@ function storeInput() {
     localStorage.setItem("search", searchInput)
 }
 
-function getPersonImage() {
-    apiUrlgetPersonImage = "https://api.themoviedb.org/3/person/" +personID + "/images?api_key=" + apiKey;
+function getPersonImage(id) {
+    apiUrlgetPersonImage = "https://api.themoviedb.org/3/person/" + id + "/images?api_key=" + apiKey;
     fetch(apiUrlgetPersonImage)
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
-        console.log(data);
-        console.log("https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path );
+        //console.log(data);
+        //console.log("https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path );
         
         $("#personImage").attr("src","https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path );
         $("#personImage").attr({width: "200", height: "250"} );
@@ -92,15 +95,15 @@ function getPersonImage() {
     })
 }
 
-function getPersonBio() {
-    apiUrlgetPersonBio = "https://api.themoviedb.org/3/person/" + personID + "?api_key=" + apiKey;
+function getPersonBio(id) {
+    apiUrlgetPersonBio = "https://api.themoviedb.org/3/person/" + id + "?api_key=" + apiKey;
     fetch(apiUrlgetPersonBio)
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
         //console.log(data);
-        console.log(data.biography);
+        //console.log(data.biography);
         //alert("Text: " 
         $("#personBio").text(data.biography);
         $("#personName").text(data.name);
@@ -133,10 +136,11 @@ function getTwitterTimeline(){
     })
 }
 
-function getMoviePopularity() {
+function getMoviePopularity(id) {
+    apiUrlPersonGetMovieCredits = "https://api.themoviedb.org/3/person/" + id+ "/movie_credits?api_key="+ apiKey
     fetch(apiUrlPersonGetMovieCredits)
     .then(function (response) {
-    return response.json()
+        return response.json()
     })
     .then(function (data) {
         data = data.cast
@@ -190,15 +194,24 @@ function displayTopMovies() {
     movieThree.innerHTML = movieArr[scoreIndex[2]];
     movieFour.innerHTML = movieArr[scoreIndex[3]];
     movieFive.innerHTML = movieArr[scoreIndex[4]];
+    getMovieID();
 }
 
-function getMovieIDArr() {
-    for (var i=0; i<5;i++) {
-        getMovieDetails(movieIDArr[scoreIndex[i]])
-        console.log(movieIDArr[scoreIndex[i]])
-    }
-}
-
+ //   function getMovieIDArr(movieIDArr, scoreIndex ) {
+ //       scoreIndex.forEach(
+ //           
+ //       
+ //       
+ //       
+ //       
+ //   for (var i=0; i<5;i++) {
+ //       var index = scoreIndex[i]
+//
+ //       console.log(index)
+ //       //getMovieDetails(movieIDArr[index]);
+ //   }
+ //   }
+$( window ).on("load", getPersonID )
 
 // use popular movies function to detect movieID
 // run a getMovieID function?
