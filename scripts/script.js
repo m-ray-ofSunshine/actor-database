@@ -35,7 +35,7 @@ function getPersonID() {
         getPersonImage(personID);
         getPersonBio(personID);
         getMoviePopularity(personID)
-        getMovieIDArr(movieIDArr, scoreIndex)
+        //getMovieIDArr(movieIDArr, scoreIndex)
     })
     
 }
