@@ -133,8 +133,6 @@ function getTwitterTimeline(){
     })
 }
 
-
-=======
 function getMoviePopularity() {
     fetch(apiUrlPersonGetMovieCredits)
     .then(function (response) {
