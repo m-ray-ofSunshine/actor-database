@@ -11,6 +11,8 @@ var personTwitterID;
 var apiUrlgetPersonImage;
 var apiUrlgetPersonBio;
 var apiUrlgetPersonName;
+var apiUrlgetMovieDetails;
+var apiUrlgetTwitterTimeline;
 
 var scoreArr = [];
 var scoreIndex = [];
@@ -51,7 +53,7 @@ function getPersonMovieCredits() {
         return response.json()
     })
     .then(function (data) {
-        //console.log(data);
+        console.log(data);
         
     })
 }
@@ -106,6 +108,33 @@ function getPersonBio() {
     })
 }
 
+
+function getMovieDetails(movieID){
+    apiUrlgetMovieDetails = "https://api.themoviedb.org/3/movie/" + movieID + "?api_key=" +apiKey;
+    fetch(apiUrlgetMovieDetails)
+    .then(function (response){
+        return response.json()
+    })
+    .then(function (data) {
+        //console.log(data);
+        $(".releaseDate").text(data.release_date);
+        $(".genre").text(data.genres.name);
+        $(".tagline").text(data.tagline);
+        $(".synopsis").text(data.overview);
+        $(".revenue").text(data.revenue);
+    })
+}
+
+function getTwitterTimeline(){
+    apiUrlgetTwitterTimeline = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + twitterName + "&count=2"
+    fetch(apiUrlgetTwitterTimeline)
+    .then(function (response){
+        return response.json()
+    })
+}
+
+
+=======
 function getMoviePopularity() {
     fetch(apiUrlPersonGetMovieCredits)
     .then(function (response) {
@@ -172,3 +201,7 @@ function getMovieIDArr() {
     }
 }
 
+
+// use popular movies function to detect movieID
+// run a getMovieID function?
+// use MovieID to populate 
