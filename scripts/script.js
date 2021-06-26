@@ -12,6 +12,17 @@ var apiUrlgetPersonImage;
 var apiUrlgetPersonBio;
 var apiUrlgetPersonName;
 
+var scoreArr = [];
+var scoreIndex = [];
+var movieArr = [];
+var movieIDArr = [];
+var movieOne = document.getElementById("movieOne");
+var movieTwo = document.getElementById("movieTwo");
+var movieThree = document.getElementById("movieThree");
+var movieFour = document.getElementById("movieFour");
+var movieFive = document.getElementById("movieFive");
+
+
 function getPersonID() {
     fetch(apiUrlPersonSearch)
     .then(function (response) {
@@ -95,4 +106,69 @@ function getPersonBio() {
     })
 }
 
+function getMoviePopularity() {
+    fetch(apiUrlPersonGetMovieCredits)
+    .then(function (response) {
+    return response.json()
+    })
+    .then(function (data) {
+        data = data.cast
+        for (var i=0; i<data.length;i++) {
+            scoreArr.push(data[i].popularity)
+        }
+        getMovieName();
+    })
+}
+
+function getMovieName() {
+    fetch(apiUrlPersonGetMovieCredits)
+    .then(function (response) {
+    return response.json()
+    })
+    .then(function (data) {
+        data = data.cast
+        for (var i=0; i<data.length;i++) {
+            movieArr.push(data[i].original_title)
+        }
+        getIndex();
+    })
+}
+
+function getMovieID() {
+    fetch(apiUrlPersonGetMovieCredits)
+    .then(function (response) {
+    return response.json()
+    })
+    .then(function (data) {
+        data = data.cast
+        for (var i=0; i<data.length;i++) {
+            movieIDArr.push(data[i].id)
+
+        }
+    })
+}
+
+function getIndex() {
+    for (var i=0; i<5;i++) {
+        var indexValue = scoreArr.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
+        scoreIndex.push(indexValue);
+        scoreArr.splice(indexValue,1,0);
+    }
+    displayTopMovies();
+}
+
+function displayTopMovies() {
+    movieOne.innerHTML = movieArr[scoreIndex[0]];
+    movieTwo.innerHTML = movieArr[scoreIndex[1]];
+    movieThree.innerHTML = movieArr[scoreIndex[2]];
+    movieFour.innerHTML = movieArr[scoreIndex[3]];
+    movieFive.innerHTML = movieArr[scoreIndex[4]];
+}
+
+function getMovieIDArr() {
+    for (var i=0; i<5;i++) {
+        getMovieDetails(movieIDArr[scoreIndex[i]])
+        console.log(movieIDArr[scoreIndex[i]])
+    }
+}
 
