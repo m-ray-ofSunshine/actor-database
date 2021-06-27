@@ -1,0 +1,7 @@
+*{
+    background-color: brown;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.img-thumbnail{
+    background-image:linear-gradient(grey,black);
+}
