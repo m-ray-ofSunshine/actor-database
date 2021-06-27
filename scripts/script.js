@@ -1,3 +1,5 @@
+
+
 $("#searchBtn").on("click", storeInput)
 var searchInput = localStorage.getItem("search")
 var apiKey = "65e03376af118d009632cee16530207e"
@@ -31,10 +33,12 @@ function getPersonID() {
         return response.json()
     })
     .then(function (data) {
+        console.log(data)
         personID = data.results[0].id; 
         getPersonImage(personID);
         getPersonBio(personID);
         getMoviePopularity(personID)
+        getPersonTwitterID(personID)
         //getMovieIDArr(movieIDArr, scoreIndex)
     })
     
@@ -60,8 +64,8 @@ function getPersonMovieCredits() {
         
     })
 }
-function getPersonTwitterID() {
-    apiUrlPersonGetTwitterID = "https://api.themoviedb.org/3/person/" + personID + "/external_ids?api_key=" + apiKey 
+function getPersonTwitterID(id) {
+    apiUrlPersonGetTwitterID = "https://api.themoviedb.org/3/person/" + id + "/external_ids?api_key=" + apiKey 
     fetch(apiUrlPersonGetTwitterID)
     .then(function (response) {
         return response.json()
@@ -69,7 +73,7 @@ function getPersonTwitterID() {
     .then(function (data) {
         //console.log(data);
         personTwitterID = data.twitter_id;
-        
+        getTwitterTimeline(personTwitterID)
     })
 }
 
@@ -128,12 +132,26 @@ function getMovieDetails(movieID){
     })
 }
 
-function getTwitterTimeline(){
-    apiUrlgetTwitterTimeline = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + twitterName + "&count=2"
-    fetch(apiUrlgetTwitterTimeline)
-    .then(function (response){
-        return response.json()
-    })
+function getTwitterTimeline(twitterScreenName){
+    twttr.widgets.createTimeline(
+        {
+          sourceType: 'profile',
+          screenName: twitterScreenName
+        },
+        document.getElementById('timeline'),
+        {
+          width: '450',
+          height: '700',
+          related: 'twitterdev,twitterapi'
+        }).then(function (el) {
+          console.log('Embedded a timeline.')
+        });
+  
+    // apiUrlgetTwitterTimeline = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + twitterName + "&count=2"
+   // fetch(apiUrlgetTwitterTimeline)
+  //  .then(function (response){
+   //     return response.json()
+   // })
 }
 
 function getMoviePopularity(id) {
