@@ -40,6 +40,7 @@ function getPersonID() {
         getPersonBio(personID);
         getMoviePopularity(personID)
         getPersonTwitterID(personID)
+        getNews(searchInput)
         //getMovieIDArr(movieIDArr, scoreIndex)
     })
     
