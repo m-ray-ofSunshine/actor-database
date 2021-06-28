@@ -28,6 +28,10 @@ var movieThree = document.getElementById("movieThree");
 var movieFour = document.getElementById("movieFour");
 var movieFive = document.getElementById("movieFive");
 var topSelections = $(".topSelections")
+var topMoviesCard = $(".topMoviesCard")
+var topMoviesTitle = $(".topMoviesTitle")
+var topMoviesDetails = $(".topMoviesDetails")
+
 
 
 function getPersonID() {
@@ -237,10 +241,10 @@ function displayTopMovies() {
             .then(function (data) {
                 console.log(data);
 
-
-                var movieCard = $("<div/>").addClass("row")
-                var movieTitle = $("<div/>").addClass("col-1")
-                var movieDetails = $("<div/>").addClass("col-11 row")
+                
+                
+                var movieTitle = $("<div/>").addClass("col-1 movieTitle")
+                var movieDetails = $("<div/>").addClass("col-11 row movieDetails")
                 movieTitle.append($("<h6>").text(data.title))
                 
                 
@@ -251,8 +255,10 @@ function displayTopMovies() {
                 var synopsis = $("<p/>").text(data.overview).addClass("col-2");
                 var revenue = $("<p/>").text(data.revenue).addClass("col-2");
                 movieDetails.append(releaseDate, genre, tagline, synopsis, revenue)
-                movieCard.append(movieTitle, movieDetails)
-                topSelections.append(movieCard)
+                topMoviesTitle.append(movieTitle)
+                topMoviesDetails.append(movieDetails)
+                topMoviesCard.append()
+                
             })
     }
 }
