@@ -3,6 +3,7 @@
 $("#searchBtn").on("click", storeInput)
 var searchInput = localStorage.getItem("search")
 var apiKey = "65e03376af118d009632cee16530207e"
+var mediastackApiKey = "95cf4635444d7de781b2e3943b1b8db4"
 var apiUrlPersonSearch = "https://api.themoviedb.org/3/search/person?api_key="+ apiKey + "&query=" + searchInput
 
 var apiUrlPersonGetDetails;
@@ -147,11 +148,7 @@ function getTwitterTimeline(twitterScreenName){
           console.log('Embedded a timeline.')
         });
   
-    // apiUrlgetTwitterTimeline = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=" + twitterName + "&count=2"
-   // fetch(apiUrlgetTwitterTimeline)
-  //  .then(function (response){
-   //     return response.json()
-   // })
+  
 }
 
 function getMoviePopularity(id) {
@@ -215,20 +212,19 @@ function displayTopMovies() {
     getMovieID();
 }
 
- //   function getMovieIDArr(movieIDArr, scoreIndex ) {
- //       scoreIndex.forEach(
- //           
- //       
- //       
- //       
- //       
- //   for (var i=0; i<5;i++) {
- //       var index = scoreIndex[i]
-//
- //       console.log(index)
- //       //getMovieDetails(movieIDArr[index]);
- //   }
- //   }
+function getNews(searchInput) {
+    apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey + "&languages=en&keywords=" + searchInput
+    fetch(apiUrlNews)
+    .then(function (response) {
+        return response.json()
+    })
+    .then(function (data) {
+        console.log(data)
+    })
+}
+
+
+ 
 $( window ).on("load", getPersonID )
 
 // use popular movies function to detect movieID
