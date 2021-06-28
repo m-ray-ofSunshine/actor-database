@@ -292,7 +292,7 @@ function getNews(searchInput) {
                 a.attr('href', item.url)
                 a.attr('target', '_blank')
                 a.text(item.title)
-                li.append(a)
+                li.append(a).addClass("list-group-item list-group-item-action list-group-item-dark")
                 ul.append(li)
             })
             $(".newsList").append(ul)

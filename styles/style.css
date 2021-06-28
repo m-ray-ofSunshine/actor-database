@@ -3,6 +3,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .card {
@@ -11,6 +13,7 @@ body {
     margin-top: 100px;
     border-width: 10px;
     border-color: white;
+    
 }
 
 .card-header {
@@ -25,3 +28,21 @@ body {
 .topSelections > div{
     border:1px solid white
 }
+
+.list-group-item-dark {
+    background-color: #343a40;
+}
+
+.topSelections {
+    color:white;
+}
+
+.topMovieDetails {
+    color: white;
+}
+
+#personBio {
+    display: flex;
+    align-items: center;
+}
+
