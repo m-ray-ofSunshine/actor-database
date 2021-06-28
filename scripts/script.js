@@ -213,13 +213,24 @@ function displayTopMovies() {
 }
 
 function getNews(searchInput) {
-    apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey + "&languages=en&keywords=" + searchInput
+    apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey + "&languages=en&keywords=" + searchInput + "&limit=10"
     fetch(apiUrlNews)
     .then(function (response) {
         return response.json()
     })
     .then(function (data) {
-        console.log(data)
+        var ul = $("<ul/>")
+        data.data.forEach(function(item,index){
+            console.log(item.title)
+            var li = $("<li/>")
+            var a =$("<a/>")
+            a.attr('href',item.url)
+            a.attr('target', '_blank')
+            a.text(item.title)
+            li.append(a)
+            ul.append(li)
+        })
+        $(".newsList").append(ul)
     })
 }
 
