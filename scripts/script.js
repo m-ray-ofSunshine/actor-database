@@ -32,6 +32,12 @@ var topMoviesCard = $(".topMoviesCard")
 var topMoviesTitle = $(".topMoviesTitle")
 var topMoviesDetails = $(".topMoviesDetails")
 
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+});
 
 
 function getPersonID() {
@@ -241,24 +247,25 @@ function displayTopMovies() {
             .then(function (data) {
                 console.log(data);
 
-                
-                
-                var movieTitle = $("<div/>").addClass("col-1 movieTitle")
-                var movieDetails = $("<div/>").addClass("col-11 row movieDetails")
-                movieTitle.append($("<h6>").text(data.title))
-                
-                
-                
-                var releaseDate = $("<p/>").text(data.release_date).addClass("col-2");
-                var genre = $("<p/>").text(data.genres.name).addClass("col-2");
-                var tagline = $("<p/>").text(data.tagline).addClass("col-2");
-                var synopsis = $("<p/>").text(data.overview).addClass("col-2");
-                var revenue = $("<p/>").text(data.revenue).addClass("col-2");
-                movieDetails.append(releaseDate, genre, tagline, synopsis, revenue)
-                topMoviesTitle.append(movieTitle)
-                topMoviesDetails.append(movieDetails)
-                topMoviesCard.append()
-                
+
+                var row = $("<tr>")
+                var movieTitle = $("<th/>").attr("scope", "row")
+                //var movieDetails = $("<div/>").addClass("col-11 row movieDetails")
+                movieTitle.text(data.title)
+                console.log(data)
+
+
+                var releaseDate = $("<td/>").text(data.release_date).addClass("col-2");
+                var genre = $("<td/>").text(data.genres[0].name).addClass("col-2");
+                var tagline = $("<td/>").text(data.tagline).addClass("col-2");
+                var synopsis = $("<td/>").text(data.overview).addClass("col-2");
+                var revenue = $("<td/>").text(formatter.format(data.revenue)).addClass("col-2");
+                //movieDetails.append(releaseDate, genre, tagline, synopsis, revenue)
+                //topMoviesTitle.append(movieTitle)
+                row.append(movieTitle, releaseDate, genre, tagline, synopsis, revenue)
+                //topMoviesCard.append()
+                topMoviesDetails.append(row)
+
             })
     }
 }
