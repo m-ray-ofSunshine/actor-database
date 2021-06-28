@@ -141,12 +141,11 @@ function getTwitterTimeline(twitterScreenName){
         },
         document.getElementById('timeline'),
         {
-          width: '450',
+          width: '550',
           height: '700',
-          related: 'twitterdev,twitterapi'
-        }).then(function (el) {
-          console.log('Embedded a timeline.')
-        });
+          chrome: "noscrollbar",
+          theme: "dark"
+        })
   
   
 }
