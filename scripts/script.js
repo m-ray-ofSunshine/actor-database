@@ -286,7 +286,6 @@ function getNews(searchInput) {
             return response.json()
         })
         .then(function (data) {
-            console.log(data)
             var ul = $("<ul/>")
             data.data.forEach(function (item, index) {
                 var li = $("<li/>")
