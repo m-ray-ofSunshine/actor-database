@@ -50,3 +50,11 @@ h4 {
     display:flex;
     justify-content: center;
 }
+footer{
+    text-align: center;
+    padding-top:30px;
+}
+footer img{
+    width:2%;
+    height:2%;
+}
