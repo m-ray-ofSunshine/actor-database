@@ -1,21 +1,18 @@
 
 
-$("#searchBtn").on("click", storeInput)
 var searchInput = localStorage.getItem("search")
 var apiKey = "65e03376af118d009632cee16530207e"
 var mediastackApiKey = "95cf4635444d7de781b2e3943b1b8db4"
+<<<<<<< HEAD
 var mediastackApiKey2 = "469b5ecadc5450b6e320fec4bd026172"
 var apiUrlPersonSearch = "https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&query=" + searchInput
+=======
+>>>>>>> main
 
 var apiUrlPersonGetDetails;
 var apiUrlPersonGetMovieCredits;
 var apiUrlPersonGetTwitterID;
 var personTwitterID;
-
-var apiUrlgetPersonImage;
-var apiUrlgetPersonBio;
-var apiUrlgetPersonName;
-var apiUrlgetMovieDetails;
 var apiUrlgetTwitterTimeline;
 
 var scoreArr = [];
@@ -23,11 +20,6 @@ var scoreIndex = [];
 var movieArr = [];
 var movieIDArr = [];
 var movieNameArr = [];
-var movieOne = document.getElementById("movieOne");
-var movieTwo = document.getElementById("movieTwo");
-var movieThree = document.getElementById("movieThree");
-var movieFour = document.getElementById("movieFour");
-var movieFive = document.getElementById("movieFive");
 var topSelections = $(".topSelections")
 var topMoviesCard = $(".topMoviesCard")
 var topMoviesTitle = $(".topMoviesTitle")
@@ -40,8 +32,9 @@ var formatter = new Intl.NumberFormat('en-US', {
     maximumFractionDigits: 0,
 });
 
-
+//Fetches the Persons ID and sets it to a global variable then runs other functions using that ID
 function getPersonID() {
+    var apiUrlPersonSearch = "https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&query=" + searchInput
     fetch(apiUrlPersonSearch)
         .then(function (response) {
             return response.json()
@@ -53,31 +46,12 @@ function getPersonID() {
             getMoviePopularity(personID)
             getPersonTwitterID(personID)
             getNews(searchInput)
-            //getMovieIDArr(movieIDArr, scoreIndex)
         })
 
 }
-function getPersonDetails() {
-    apiUrlPersonGetDetails = "https://api.themoviedb.org/3/person/" + personID + "?api_key=" + apiKey
-    fetch(apiUrlPersonGetDetails)
-        .then(function (response) {
-            return response.json()
-        })
-        .then(function (data) {
-            //console.log(data);
 
-        })
-}
-function getPersonMovieCredits() {
-    fetch(apiUrlPersonGetMovieCredits)
-        .then(function (response) {
-            return response.json()
-        })
-        .then(function (data) {
-            console.log(data);
-
-        })
-}
+//Fetches the persons twitter screen name
+//Runs getTwitterTimeline() and passes the persons twiiter screen name to it
 function getPersonTwitterID(id) {
     apiUrlPersonGetTwitterID = "https://api.themoviedb.org/3/person/" + id + "/external_ids?api_key=" + apiKey
     fetch(apiUrlPersonGetTwitterID)
@@ -85,18 +59,12 @@ function getPersonTwitterID(id) {
             return response.json()
         })
         .then(function (data) {
-            //console.log(data);
             personTwitterID = data.twitter_id;
             getTwitterTimeline(personTwitterID)
         })
 }
 
-function storeInput() {
-    searchInput = $("#userInput").val()
-    console.log(searchInput);
-    localStorage.setItem("search", searchInput)
-}
-
+//Fetches person's image and places it on our page with correct dimensions 
 function getPersonImage(id) {
     apiUrlgetPersonImage = "https://api.themoviedb.org/3/person/" + id + "/images?api_key=" + apiKey;
     fetch(apiUrlgetPersonImage)
@@ -104,15 +72,12 @@ function getPersonImage(id) {
             return response.json()
         })
         .then(function (data) {
-            //console.log(data);
-            //console.log("https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path );
-
             $("#personImage").attr("src", "https://www.themoviedb.org/t/p/original" + data.profiles[0].file_path);
             $("#personImage").attr({ width: "200", height: "250" });
 
         })
 }
-
+//Fetches person's bio and name and places it on our page
 function getPersonBio(id) {
     apiUrlgetPersonBio = "https://api.themoviedb.org/3/person/" + id + "?api_key=" + apiKey;
     fetch(apiUrlgetPersonBio)
@@ -120,9 +85,6 @@ function getPersonBio(id) {
             return response.json()
         })
         .then(function (data) {
-            //console.log(data);
-            //console.log(data.biography);
-            //alert("Text: " 
             $("#personBio").text(data.biography);
             $("#personName").text(data.name);
 
@@ -130,29 +92,8 @@ function getPersonBio(id) {
 }
 
 
-function getMovieDetails() {
-    console.log(movieNameArr)
-    movieNameArr.forEach(function (id) {
-        apiUrlgetMovieDetails = "https://api.themoviedb.org/3/movie/" + id + "?api_key=" + apiKey;
-        fetch(apiUrlgetMovieDetails)
-            .then(function (response) {
-                return response.json()
-            })
-            .then(function (data) {
-                //console.log(data);
 
-                $(".releaseDate").text(data.release_date);
-                $(".genre").text(data.genres.name);
-                $(".tagline").text(data.tagline);
-                $(".synopsis").text(data.overview);
-                $(".revenue").text(data.revenue);
-            })
-    })
-    for (var i = 0; i < movieNameArr; i++) {
-
-    }
-}
-
+//Takes in a twitter screen name and displays an embedded timeline based on 
 function getTwitterTimeline(twitterScreenName) {
     twttr.widgets.createTimeline(
         {
@@ -169,7 +110,9 @@ function getTwitterTimeline(twitterScreenName) {
 
 
 }
-
+//Fetches movie credits that the person has been a cast in
+//then pushes the popularity number of each movie into scoreArr array
+//then runs getMovieName() and passes movie credits data to it
 function getMoviePopularity(id) {
     apiUrlPersonGetMovieCredits = "https://api.themoviedb.org/3/person/" + id + "/movie_credits?api_key=" + apiKey
     fetch(apiUrlPersonGetMovieCredits)
@@ -184,43 +127,28 @@ function getMoviePopularity(id) {
             getMovieName(data);
         })
 }
-
+//Pushes the title of each movie into movieArr array
+//then runs getMovieID() and passes movie credits data to it
 function getMovieName(data) {
     for (var i = 0; i < data.length; i++) {
         movieArr.push(data[i].original_title)
     }
-
-
     getMovieID(data);
 }
+//Pushes the Movie ID of each movie into movieIDArr array
+//then runs getIndex()
 function getMovieID(data) {
-    // console.log(data);
-
-
     for (var i = 0; i < data.length; i++) {
         movieIDArr.push(data[i].id)
     }
-    //console.log(movieIDArr);
-
     getIndex();
 }
 
 
-//function getMovieID() {
-//    for (var i = 0; i < movieNameArr.length; i++) {
-//        var apiUrlgetMovieID = "https://api.themoviedb.org/3/search/movie?api_key="+apiKey+"&language=en-US&query="+movieNameArr[i]
-//        fetch(apiUrlgetMovieID)
-//            .then(function (response) {
-//                return response.json()
-//            })
-//            .then(function (data) {
-//               console.log(data);
-//
-//
-//            })
-//    }
-//}
-
+//Grabs the indexs of the top 5 movies based on popularity and pushes those indexes into scoreIndex
+//Each time it grabs a index it changes the popularity of that movie to 0 to not grab it again
+//Grabs the ID of each movie based on popularity and adds it to movieNameArr
+//Runs displayTopMovies()
 function getIndex() {
     for (var i = 0; i < 5; i++) {
         var indexValue = scoreArr.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
@@ -234,9 +162,11 @@ function getIndex() {
 
 
     displayTopMovies();
-    getMovieDetails(movieNameArr);
+    
 }
-
+//Iterates of the top 5 movies
+//Dynamically adds the title, release date, genre, tagline, synopsis, and revenue to a table row
+//Appends the table row to the table
 function displayTopMovies() {
     for (var i = 0; i < scoreIndex.length; i++) {
 
@@ -246,14 +176,13 @@ function displayTopMovies() {
                 return response.json()
             })
             .then(function (data) {
-                console.log(data);
+              
 
 
                 var row = $("<tr>")
                 var movieTitle = $("<th/>").attr("scope", "row")
-                //var movieDetails = $("<div/>").addClass("col-11 row movieDetails")
                 movieTitle.text(data.title)
-                console.log(data)
+                
 
 
                 var releaseDate = $("<td/>").text(data.release_date).addClass("col-2");
@@ -261,24 +190,19 @@ function displayTopMovies() {
                 var tagline = $("<td/>").text(data.tagline).addClass("col-2");
                 var synopsis = $("<td/>").text(data.overview).addClass("col-2");
                 var revenue = $("<td/>").text(formatter.format(data.revenue)).addClass("col-2");
-                //movieDetails.append(releaseDate, genre, tagline, synopsis, revenue)
-                //topMoviesTitle.append(movieTitle)
                 row.append(movieTitle, releaseDate, genre, tagline, synopsis, revenue)
-                //topMoviesCard.append()
                 topMoviesDetails.append(row)
 
             })
     }
 }
 
-// movieOne.innerHTML = movieArr[scoreIndex[0]];
-// movieTwo.innerHTML = movieArr[scoreIndex[1]];
-// movieThree.innerHTML = movieArr[scoreIndex[2]];
-// movieFour.innerHTML = movieArr[scoreIndex[3]];
-// movieFive.innerHTML = movieArr[scoreIndex[4]];
 
 
 
+//Passes in the search input into the function
+//Makes a link for the top 10 news stories
+//Appends the link to a unordered list
 function getNews(searchInput) {
     apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey2 + "&languages=en&keywords=" + searchInput + "&limit=10"
     fetch(apiUrlNews)
@@ -300,10 +224,6 @@ function getNews(searchInput) {
         })
 }
 
-
+//When the window loads run getPersonID() Function
 
 $(window).on("load", getPersonID)
-
-// use popular movies function to detect movieID
-// run a getMovieID function?
-// use MovieID to populate 
