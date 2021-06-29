@@ -3,6 +3,11 @@
 var searchInput = localStorage.getItem("search")
 var apiKey = "65e03376af118d009632cee16530207e"
 var mediastackApiKey = "95cf4635444d7de781b2e3943b1b8db4"
+<<<<<<< HEAD
+var mediastackApiKey2 = "469b5ecadc5450b6e320fec4bd026172"
+var apiUrlPersonSearch = "https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&query=" + searchInput
+=======
+>>>>>>> main
 
 var apiUrlPersonGetDetails;
 var apiUrlPersonGetMovieCredits;
@@ -199,7 +204,7 @@ function displayTopMovies() {
 //Makes a link for the top 10 news stories
 //Appends the link to a unordered list
 function getNews(searchInput) {
-    apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey + "&languages=en&keywords=" + searchInput + "&limit=10"
+    apiUrlNews = "http://api.mediastack.com/v1/news?access_key=" + mediastackApiKey2 + "&languages=en&keywords=" + searchInput + "&limit=10"
     fetch(apiUrlNews)
         .then(function (response) {
             return response.json()
