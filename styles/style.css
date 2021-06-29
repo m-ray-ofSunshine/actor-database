@@ -19,12 +19,9 @@ body {
 .card-header {
     font-size: 30px;
     background-color: white;
+    color: black;
 }
 
-#movieReel {
-    width:30%;
-    height:30%;
-}
 .topSelections > div{
     border:1px solid white
 }
