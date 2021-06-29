@@ -3,11 +3,8 @@
 var searchInput = localStorage.getItem("search")
 var apiKey = "65e03376af118d009632cee16530207e"
 var mediastackApiKey = "95cf4635444d7de781b2e3943b1b8db4"
-<<<<<<< HEAD
 var mediastackApiKey2 = "469b5ecadc5450b6e320fec4bd026172"
-var apiUrlPersonSearch = "https://api.themoviedb.org/3/search/person?api_key=" + apiKey + "&query=" + searchInput
-=======
->>>>>>> main
+
 
 var apiUrlPersonGetDetails;
 var apiUrlPersonGetMovieCredits;
