@@ -51,3 +51,5 @@ The following requirements have been included and met through our coding functio
 
 # Result Page
 ![resultPage](./assets/images/resultPage.PNG)
+
+![resultPage2](./assets/images/resultPage2.PNG)
