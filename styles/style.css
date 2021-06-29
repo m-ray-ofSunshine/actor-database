@@ -45,4 +45,7 @@ body {
     display: flex;
     align-items: center;
 }
-
+h4 {
+    display:flex;
+    justify-content: center;
+}
