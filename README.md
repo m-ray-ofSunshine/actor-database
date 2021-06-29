@@ -1,5 +1,6 @@
 # Actor database 
 
+Deployment: https://m-ray-ofsunshine.github.io/actor-database/
 
 # Description -
 
@@ -21,11 +22,11 @@ The website's home page requires the user to search a actor/actress name, then t
 
     * Use client-side storage to store persistent data.
 
-Three APIs were implemented within the website. The MovieDB, Twitter, and Media Stack. 
+Two APIs were implemented within the website as well as one widget. The MovieDB, Twitter, and Media Stack. 
 
 The movieDB took used the local storage from the search input from the user and populated the actor/actress's photo, name, bio, top five movies, and those movie's descriptive features.
 
-The movieDB also supplied the twitter ID of the actor/actress which was then implemented with the twitter API to pull their latest tweet and have it displayed.
+The movieDB also supplied the twitter ID of the actor/actress which was then implemented with the twitter widget to pull their latest tweet and have it displayed.
 
 Media stack was used to pull articles that pretain to the actor/actress. These articles are formatted as hyperlinks which display the article's title as the link. When clicked, it will redirect the user to the article.
 
