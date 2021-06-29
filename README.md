@@ -47,7 +47,7 @@ The following requirements have been included and met through our coding functio
     * Have a quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
 
 # Home Page
-![homePage](./images/homePage.PNG)
+![homePage](./assets/images/homePage.PNG)
 
 # Result Page
-![resultPage](./images/resultPage.PNG)
+![resultPage](./assets/images/resultPage.PNG)
